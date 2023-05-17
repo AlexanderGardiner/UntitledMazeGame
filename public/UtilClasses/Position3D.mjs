@@ -29,10 +29,19 @@ export default class Position3D {
         this.zPos = zPos;
     }
 
-    add(vector3D) {
-        return new Position3D(this.getXPos() + vector3D.getXPos(), 
-                              this.getYPos() + vector3D.getYPos(), 
-                              this.getZPos() + vector3D.getZPos());
+    addPosition3D(position3D) {
+        return new Position3D(this.getXPos() + position3D.getXPos(), 
+                              this.getYPos() + position3D.getYPos(), 
+                              this.getZPos() + position3D.getZPos());
     }
+
+    addVector3D(vector3D) {
+        console.log(vector3D.getXMagnitude());
+        console.log(vector3D.getYMagnitude());
+        return new Position3D(this.getXPos() + vector3D.getXMagnitude(), 
+                              this.getYPos() + vector3D.getYMagnitude(), 
+                              this.getZPos() + vector3D.getZMagnitude());
+    }
+
 
 }

@@ -20,7 +20,7 @@ export default class Rotation2D {
         this.yRotation = yRotation;
     }
 
-    add(vector3D) {
+    addVector3D(vector3D) {
         return new Rotation3D(this.getXRotation() + vector3D.getXMagnitude(), 
                               this.getYRotation() + vector3D.getYMagnitude());
     }
