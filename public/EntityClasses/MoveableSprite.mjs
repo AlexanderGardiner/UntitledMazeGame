@@ -5,6 +5,7 @@ export default class MoveableSprite extends Sprite {
     constructor(position3D, imagePath, width, height) {
         super(position3D, imagePath, width, height);
         this.speed = new Vector3D(0, 0, 0);
+        this.type = "Moveable Sprite";
     }
 
     getSpeed() {

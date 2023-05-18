@@ -18,6 +18,10 @@ export default class Scene {
         return this.entities[index];
     }
 
+    getEntitiesLength() {
+        return this.entities.lenth;
+    }
+
     addEntity(entity) {
         this.entities.push(entity);
     }
@@ -36,6 +40,8 @@ export default class Scene {
                     this.drawRectOnCanvas(this.entities[i].getXPos(), this.entities[i].getYPos(), pointSize, pointSize)
                 }
             } else if (this.entities[i].type == "Sprite") {
+                this.drawSpriteOnCanvas(this.entities[i].getPosition3D().getXPos(), this.entities[i].getPosition3D().getYPos(), this.entities[i].getWidth(), this.entities[i].getHeight(), this.entities[i].getImage());
+            } else if (this.entities[i].type == "Player") {
                 this.drawSpriteOnCanvas(this.entities[i].getPosition3D().getXPos(), this.entities[i].getPosition3D().getYPos(), this.entities[i].getWidth(), this.entities[i].getHeight(), this.entities[i].getImage());
             }
         }

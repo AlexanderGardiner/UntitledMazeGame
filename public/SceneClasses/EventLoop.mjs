@@ -1,6 +1,7 @@
 import Rotation3D from "../UtilClasses/Rotation3D.mjs";
 import Position3D from "../UtilClasses/Position3D.mjs";
 import Vector3D from "../UtilClasses/Vector3D.mjs";
+import CollisionManager from "./CollisionManager.mjs";
 
 export default class EventLoop {
     constructor(scene, keyboardInput) {
@@ -9,6 +10,7 @@ export default class EventLoop {
         this.previousTime = performance.now();
         this.currentTime = performance.now();
         this.deltaTime;
+        this.collisionManager = new CollisionManager(this.scene);
     }
 
     update() {
@@ -124,12 +126,12 @@ export default class EventLoop {
         player.setSpeed(player.getSpeed().multiplyVector3D(new Vector3D(this.deltaTime, this.deltaTime, this.deltaTime)));
 
 
-        player.setPosition3D(player.getPosition3D().addVector3D(player.getSpeed()));
-        
+        this.collisionManager.move(player, player.getSpeed());
         this.scene.clearScene();
         this.scene.updateScene();
 
         window.requestAnimationFrame(this.update.bind(this));
+        // setTimeout(this.update.bind(this), 1000);
         this.previousTime = this.currentTime;
     }
 }

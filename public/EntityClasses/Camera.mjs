@@ -5,6 +5,7 @@ export default class Camera extends Entity {
         this.type = "Camera";
         this.horizontalFov = horizontalFov;
         this.verticalFov = horizontalFov / aspectRatio;
+        this.type = "Camera";
     }
 
     getHorizontalFov() {

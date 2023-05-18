@@ -1,7 +1,9 @@
 export default class Entity {
-    constructor(position3D, rotation3D=undefined) {
+    constructor(position3D, rotation3D=undefined, hitboxWidth=undefined, hitboxHeight=undefined) {
         this.position3D = position3D;
         this.rotation3D = rotation3D;
+        this.hitboxWidth = hitboxWidth;
+        this.hitboxHeight = hitboxHeight;
         this.type = "Entity";
     }
 
@@ -20,4 +22,13 @@ export default class Entity {
     setRotation3D(rotation3D) {
         this.rotation3D = rotation3D;
     }
+
+    getHitboxWidth() {
+        return this.hitboxWidth;
+    }
+
+    getHitboxHeight() {
+        return this.hitboxHeight;
+    }
+
 }
