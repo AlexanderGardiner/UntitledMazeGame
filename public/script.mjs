@@ -11,7 +11,7 @@ import KeyboardInput from "./InputClasses/KeyboardInput.mjs";
 import Sprite from "./EntityClasses/Sprite.mjs";
 var scene = new Scene(document.getElementById("viewCanvas"), 
                       new Camera(new Position3D(0,0,0), new Rotation3D(0,0,0),90,1920/1080),
-                      new Player(new Position3D(500,500,-100), "Player.png",50,50,new MovementParameters(20,5,5)));
+                      new Player(new Position3D(500,500,-100), "Player.png",50,50,new MovementParameters(7,0.7,1)));
 var keyboardInput = new KeyboardInput("ArrowLeft", "ArrowRight","ArrowUp","ArrowDown");
 
 
@@ -21,6 +21,5 @@ function movePoint(xPos, yPos) {
     scene.entities[0].setPosition3D(new Position3D(xPos,yPos,0));
 
 }
-setTimeout(() => {
-    setInterval(() => eventLoop.update(), 20);
-}, 100);
+
+eventLoop.update();

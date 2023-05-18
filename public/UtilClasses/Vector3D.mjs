@@ -35,4 +35,11 @@ export default class Vector3D {
                             this.getZMagnitude() + vector3D.getZMagnitude());
     }
 
+    multiplyVector3D(vector3D) {
+        return new Vector3D(this.getXMagnitude() * vector3D.getXMagnitude(), 
+                            this.getYMagnitude() * vector3D.getYMagnitude(), 
+                            this.getZMagnitude() * vector3D.getZMagnitude());
+    }
+
+
 }

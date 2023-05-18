@@ -50,7 +50,7 @@ export default class Scene {
     }
 
     drawSpriteOnCanvas(x, y, width, height, image) {
-        console.log(this.ctx.drawImage(image, x, this.canvasHeight-y, width, height));
+        this.ctx.drawImage(image, x, this.canvasHeight-y, width, height);
     }
 
     

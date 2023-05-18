@@ -36,8 +36,6 @@ export default class Position3D {
     }
 
     addVector3D(vector3D) {
-        console.log(vector3D.getXMagnitude());
-        console.log(vector3D.getYMagnitude());
         return new Position3D(this.getXPos() + vector3D.getXMagnitude(), 
                               this.getYPos() + vector3D.getYMagnitude(), 
                               this.getZPos() + vector3D.getZMagnitude());
