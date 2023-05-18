@@ -58,19 +58,36 @@ export default class EventLoop {
 
 
         if (!this.keyboardInput.getUpPressed() && player.getSpeed().getYMagnitude()>0) {
-            ySpeedAdjustment -= playerMovementParameters.getDeceleration();
-        }
+            if (player.getSpeed().getYMagnitude()-playerMovementParameters.getDeceleration()>0) {
+                ySpeedAdjustment -= playerMovementParameters.getDeceleration();
+            } else {
+                ySpeedAdjustment -= player.getSpeed().getYMagnitude();
+            }
+            
+        } 
 
         if (!this.keyboardInput.getDownPressed() && player.getSpeed().getYMagnitude()<0) {
-            ySpeedAdjustment += playerMovementParameters.getDeceleration();
+            if (player.getSpeed().getYMagnitude()+playerMovementParameters.getDeceleration()<0) {
+                ySpeedAdjustment += playerMovementParameters.getDeceleration();
+            } else {
+                ySpeedAdjustment -= player.getSpeed().getYMagnitude();
+            }
         }
 
         if (!this.keyboardInput.getRightPressed() && player.getSpeed().getXMagnitude()>0) {
-            xSpeedAdjustment -= playerMovementParameters.getDeceleration();
+            if (player.getSpeed().getXMagnitude()-playerMovementParameters.getDeceleration()>0) {
+                xSpeedAdjustment -= playerMovementParameters.getDeceleration();
+            } else {
+                xSpeedAdjustment -= player.getSpeed().getXMagnitude();
+            }
         }
 
         if (!this.keyboardInput.getLeftPressed() && player.getSpeed().getXMagnitude()<0) {
-            xSpeedAdjustment += playerMovementParameters.getDeceleration();
+            if (player.getSpeed().getXMagnitude()+playerMovementParameters.getDeceleration()<0) {
+                xSpeedAdjustment += playerMovementParameters.getDeceleration();
+            } else {
+                xSpeedAdjustment -= player.getSpeed().getXMagnitude();
+            }
         }
 
 
@@ -86,6 +103,10 @@ export default class EventLoop {
 
         player.setSpeed(player.getSpeed().addVector3D(new Vector3D(xSpeedAdjustment, ySpeedAdjustment, zSpeedAdjustment)));
 
+        if (player.getSpeed().getXMagnitude()!=0 && player.getSpeed().getYMagnitude()!=0) {
+            player.getSpeed().multiplyVector3D(new Vector3D(1/Math.sqrt(2),1/Math.sqrt(2),1));
+        } 
+
         if (player.getSpeed().getYMagnitude()<0.0015 && player.getSpeed().getYMagnitude()>-0.0015) {
             player.getSpeed().setYMagnitude(0);
         }
@@ -94,9 +115,7 @@ export default class EventLoop {
             player.getSpeed().setXMagnitude(0);
         }
 
-        if (player.getSpeed().getXMagnitude()!=0 && player.getSpeed().getYMagnitude()!=0) {
-            player.getSpeed().multiplyVector3D(new Vector3D(1/Math.sqrt(2),1/Math.sqrt(2),1));
-        } 
+        
 
 
         player.setPosition3D(player.getPosition3D().addVector3D(player.getSpeed()));
