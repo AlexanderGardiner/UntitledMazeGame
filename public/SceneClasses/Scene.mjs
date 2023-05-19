@@ -6,7 +6,8 @@ export default class Scene {
         this.entities = [];
         this.camera = camera;
         this.player = player;
-        this.entities.push(camera, player);
+        this.entities.push(camera);
+        this.entities.push(player);
         this.canvas = canvas;
         this.canvasWidth = canvas.width;
         this.canvasHeight = canvas.height;
@@ -19,11 +20,12 @@ export default class Scene {
     }
 
     getEntitiesLength() {
-        return this.entities.lenth;
+        return this.entities.length;
     }
 
     addEntity(entity) {
         this.entities.push(entity);
+        console.log(this.entities);
     }
 
     getPlayer() {

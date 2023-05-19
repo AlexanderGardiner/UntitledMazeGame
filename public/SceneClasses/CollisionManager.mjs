@@ -71,10 +71,9 @@ export default class CollisionManager {
                 let i=0;
                 let hitBottom = false;
                 while (i>vector3D.getYMagnitude() && !hitBottom) {
-                    let j = 1;
+                    let j = 2;
                     entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-1,0)));
                     while (!hitBottom && j<this.scene.getEntitiesLength()) {
-                        
                         hitBottom = this.checkCollision(entity, this.scene.getEntity(j)).getBottom();
                         j++;
                     }
@@ -98,9 +97,9 @@ export default class CollisionManager {
         let hitRight = false;
 
         if (entity1.getPosition3D().getXPos() < entity2.getPosition3D().getXPos() + entity2.getHitboxWidth() &&
-            entity1.getPosition3D().getXPos() + entity1.getHitboxWidth() < entity2.getPosition3D().getXPos() &&
+            entity1.getPosition3D().getXPos() + entity1.getHitboxWidth() > entity2.getPosition3D().getXPos() &&
             entity1.getPosition3D().getYPos() < entity2.getPosition3D().getYPos() + entity2.getHitboxHeight() &&
-            entity1.getPosition3D().getYPos() + entity1.getHitboxHeight() < entity2.getPosition3D().getYPos()) {
+            entity1.getPosition3D().getYPos() + entity1.getHitboxHeight() > entity2.getPosition3D().getYPos()) {
 
             if (entity1.getPosition3D().getYPos() + entity1.getHitboxHeight() < entity2.getPosition3D().getYPos()+5) {
                 hitTop = true;
@@ -110,12 +109,12 @@ export default class CollisionManager {
                 hitRight = true;
             }
 
-            if (entity1.getPosition3D().getYPos() > entity1.getPosition3D().getYPos() + entity2.getHitboxHeight()-5) {
-                hitTop = true;
+            if (entity1.getPosition3D().getYPos() > entity2.getPosition3D().getYPos() + entity2.getHitboxHeight()-5) {
+                hitBottom = true;
             }
 
-            if (entity1.getPosition3D().getXPos() > entity1.getPosition3D().getXPos() + entity2.getHitboxWidth()-5) {
-                hitTop = true;
+            if (entity1.getPosition3D().getXPos() > entity2.getPosition3D().getXPos() + entity2.getHitboxWidth()-5) {
+                hitLeft = true;
             }
         }
 

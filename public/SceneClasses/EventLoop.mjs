@@ -131,7 +131,7 @@ export default class EventLoop {
         this.scene.updateScene();
 
         window.requestAnimationFrame(this.update.bind(this));
-        // setTimeout(this.update.bind(this), 1000);
+        // setTimeout(this.update.bind(this), 20);
         this.previousTime = this.currentTime;
     }
 }
