@@ -1,8 +1,11 @@
 export default class Colour {
-    constructor(maxSpeed, acceleration, deceleration) {
+    constructor(maxSpeed, acceleration, deceleration, dashSpeed, dashLength, dashRechargeTime) {
         this.maxSpeed = maxSpeed;
         this.acceleration = acceleration;
         this.deceleration = deceleration;
+        this.dashSpeed = dashSpeed;
+        this.dashLength = dashLength;
+        this.dashRechargeTime = dashRechargeTime;
     }
 
     getMaxSpeed() {
@@ -15,5 +18,17 @@ export default class Colour {
 
     getDeceleration() {
         return this.deceleration;
+    }
+
+    getDashSpeed() {
+        return this.dashSpeed;
+    }
+
+    getDashLength() {
+        return this.dashLength;
+    }
+
+    getDashRechargeTime() {
+        return this.dashRechargeTime;
     }
 }

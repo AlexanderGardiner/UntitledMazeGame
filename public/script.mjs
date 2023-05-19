@@ -11,8 +11,8 @@ import KeyboardInput from "./InputClasses/KeyboardInput.mjs";
 import Sprite from "./EntityClasses/Sprite.mjs";
 var scene = new Scene(document.getElementById("viewCanvas"), 
                       new Camera(new Position3D(0,0,0), new Rotation3D(0,0,0),90,1920/1080),
-                      new Player(new Position3D(500,500,-100), "Player.png",50,50,50,50,new MovementParameters(7,0.7,1)));
-var keyboardInput = new KeyboardInput("ArrowLeft", "ArrowRight","ArrowUp","ArrowDown");
+                      new Player(new Position3D(500,500,-100), "Player.png",50,50,50,50,new MovementParameters(7,0.7,1,10,100, 2000)));
+var keyboardInput = new KeyboardInput("ArrowLeft", "ArrowRight","ArrowUp","ArrowDown","c");
 
 scene.addEntity(new Sprite(new Position3D(600,500,-100), "Player.png",50,50,50,50))
 

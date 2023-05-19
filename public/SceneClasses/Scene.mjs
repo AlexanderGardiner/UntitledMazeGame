@@ -54,11 +54,12 @@ export default class Scene {
     }
 
     drawRectOnCanvas(x, y, width, height) {
-        this.ctx.fillRect(x, this.canvasHeight-y, width, height);
+        this.ctx.fillRect(x-this.player.getPosition3D().getX(), this.canvasHeight-y-this.player.getPosition3D().getY(), width, height);
     }
 
     drawSpriteOnCanvas(x, y, width, height, image) {
-        this.ctx.drawImage(image, x, this.canvasHeight-y, width, height);
+        console.log(this.canvasHeight/2-y+this.player.getPosition3D().getYPos())
+        this.ctx.drawImage(image, x-this.player.getPosition3D().getXPos()+this.canvasWidth/2, this.canvasHeight/2-y+this.player.getPosition3D().getYPos(), width, height);
     }
 
     

@@ -19,23 +19,24 @@ export default class EventLoop {
         let player = this.scene.getPlayer();
         let playerMovementParameters = player.getMovementParameters()
 
-        if (!this.keyboardInput.getDashPressed()) {
+        if (!player.getIsDashing().dashing()) {
             player.setTimeDashNotPressed(player.getTimeDashNotPressed()+this.currentTime-this.previousTime);
             player.setTimeDashing(0);
         } else {
-            player.setTimeDashing(player.getTimeDashing()+this.currentTime-this.previousTime);
-            if (!player.getIsDashing().dashing()) {
-                player.setTimeDashNotPressed(0);
-            }
+            player.setTimeDashing(player.getTimeDashing()+this.currentTime-this.previousTime);         
+            player.setTimeDashNotPressed(0);
+        }
             
+        console.log(player.getTimeDashNotPressed())
+
+        
+
+        if (player.getTimeDashing()>playerMovementParameters.getDashLength()) {
+            player.setCanDash(false);
         }
 
         if (player.getTimeDashNotPressed()>playerMovementParameters.getDashRechargeTime()) {
             player.setCanDash(true);
-        }
-
-        if (player.getTimeDashing()>playerMovementParameters.getDashLength()) {
-            player.setCanDash(false);
         }
     
 
@@ -96,12 +97,10 @@ export default class EventLoop {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(-playerMovementParameters.getMaxSpeed()-player.getSpeed().getXMagnitude(),0,0)));
                 }
             }
+
             
             
         } 
-
-        
-
 
 
     
