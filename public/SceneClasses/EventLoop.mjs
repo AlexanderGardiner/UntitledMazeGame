@@ -27,9 +27,7 @@ export default class EventLoop {
             player.setTimeDashNotPressed(0);
         }
             
-        console.log(player.getTimeDashNotPressed())
-
-        
+        console.log(player.getTimeDashing())
 
         if (player.getTimeDashing()>playerMovementParameters.getDashLength()) {
             player.setCanDash(false);
@@ -48,12 +46,14 @@ export default class EventLoop {
                 player.getIsDashing().setUp(false);
                 if (player.getSpeed().getYMagnitude()+playerMovementParameters.getAcceleration()<=player.getMovementParameters().getMaxSpeed()) {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(0,playerMovementParameters.getAcceleration(),0)));
-                } else {
+                } else if (player.getSpeed().getYMagnitude()<playerMovementParameters.getMaxSpeed()) {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(0,playerMovementParameters.getMaxSpeed()-player.getSpeed().getYMagnitude(),0)));
                 }
             }
             
-        } 
+        } else {
+            player.getIsDashing().setUp(false);
+        }
         
         if (this.keyboardInput.getDownPressed()) {
             if (this.keyboardInput.getDashPressed() && player.getCanDash()) {
@@ -63,12 +63,14 @@ export default class EventLoop {
                 player.getIsDashing().setDown(false);
                 if (player.getSpeed().getYMagnitude()-playerMovementParameters.getAcceleration()>=-player.getMovementParameters().getMaxSpeed()) {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(0,-playerMovementParameters.getAcceleration(),0)));
-                } else {
+                } else if (player.getSpeed().getYMagnitude()>-playerMovementParameters.getMaxSpeed()) {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(0,-playerMovementParameters.getMaxSpeed()-player.getSpeed().getYMagnitude(),0)));
                 }
             }
             
-        } 
+        } else {
+            player.getIsDashing().setDown(false);
+        }
 
         if (this.keyboardInput.getRightPressed()) {
             if (this.keyboardInput.getDashPressed() && player.getCanDash()) {
@@ -78,12 +80,14 @@ export default class EventLoop {
                 player.getIsDashing().setRight(false);
                 if (player.getSpeed().getXMagnitude()+playerMovementParameters.getAcceleration()<=player.getMovementParameters().getMaxSpeed()) {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(playerMovementParameters.getAcceleration(),0,0)));
-                } else {
+                } else if (player.getSpeed().getXMagnitude()<playerMovementParameters.getMaxSpeed()) {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(playerMovementParameters.getMaxSpeed()-player.getSpeed().getXMagnitude(),0,0)));
                 }
             }
                 
-        } 
+        } else {
+            player.getIsDashing().setRight(false);
+        }
         
         if (this.keyboardInput.getLeftPressed()) {
             if (this.keyboardInput.getDashPressed() && player.getCanDash()) {
@@ -93,26 +97,31 @@ export default class EventLoop {
                 player.getIsDashing().setLeft(false);
                 if (player.getSpeed().getXMagnitude()-playerMovementParameters.getAcceleration()>=-player.getMovementParameters().getMaxSpeed()) {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(-playerMovementParameters.getAcceleration(),0,0)));
-                } else {
+                } else if (player.getSpeed().getXMagnitude()>-playerMovementParameters.getMaxSpeed()) {
                     player.setSpeed(player.getSpeed().addVector3D(new Vector3D(-playerMovementParameters.getMaxSpeed()-player.getSpeed().getXMagnitude(),0,0)));
                 }
             }
 
             
             
-        } 
+        } else {
+            player.getIsDashing().setLeft(false);
+        }
 
 
     
+        
     
         let xSpeedAdjustment = 0;
         let ySpeedAdjustment = 0;
         let zSpeedAdjustment = 0;
 
-
         if (!this.keyboardInput.getUpPressed() && player.getSpeed().getYMagnitude()>0 && !player.getIsDashing().getUp()) {
-            if (player.getSpeed().getYMagnitude()-playerMovementParameters.getDeceleration()>0) {
-                ySpeedAdjustment -= playerMovementParameters.getDeceleration();
+            let deceleration = playerMovementParameters.getDeceleration() * player.getSpeed().getYMagnitude();
+
+
+            if (player.getSpeed().getYMagnitude()-deceleration>0) {
+                ySpeedAdjustment -= deceleration;
             } else {
                 ySpeedAdjustment -= player.getSpeed().getYMagnitude();
             }
@@ -120,24 +129,31 @@ export default class EventLoop {
         } 
 
         if (!this.keyboardInput.getDownPressed() && player.getSpeed().getYMagnitude()<0 && !player.getIsDashing().getDown()) {
-            if (player.getSpeed().getYMagnitude()+playerMovementParameters.getDeceleration()<0) {
-                ySpeedAdjustment += playerMovementParameters.getDeceleration();
+            let deceleration = playerMovementParameters.getDeceleration() * -player.getSpeed().getYMagnitude();
+
+            
+            if (player.getSpeed().getYMagnitude()+deceleration<0) {
+                ySpeedAdjustment += deceleration;
             } else {
                 ySpeedAdjustment -= player.getSpeed().getYMagnitude();
             }
         }
 
         if (!this.keyboardInput.getRightPressed() && player.getSpeed().getXMagnitude()>0 && !player.getIsDashing().getRight()) {
-            if (player.getSpeed().getXMagnitude()-playerMovementParameters.getDeceleration()>0) {
-                xSpeedAdjustment -= playerMovementParameters.getDeceleration();
+            let deceleration = playerMovementParameters.getDeceleration() * player.getSpeed().getXMagnitude();
+            
+            if (player.getSpeed().getXMagnitude()-deceleration>0) {
+                xSpeedAdjustment -= deceleration;
             } else {
                 xSpeedAdjustment -= player.getSpeed().getXMagnitude();
             }
         }
 
         if (!this.keyboardInput.getLeftPressed() && player.getSpeed().getXMagnitude()<0 && !player.getIsDashing().getLeft()) {
-            if (player.getSpeed().getXMagnitude()+playerMovementParameters.getDeceleration()<0) {
-                xSpeedAdjustment += playerMovementParameters.getDeceleration();
+            let deceleration = playerMovementParameters.getDeceleration() * -player.getSpeed().getXMagnitude();
+
+            if (player.getSpeed().getXMagnitude()+deceleration<0) {
+                xSpeedAdjustment += deceleration;
             } else {
                 xSpeedAdjustment -= player.getSpeed().getXMagnitude();
             }
@@ -151,7 +167,6 @@ export default class EventLoop {
             zSpeedAdjustment = -playerMovementParameters.getDeceleration()
         } 
         
-
         
 
         player.setSpeed(player.getSpeed().addVector3D(new Vector3D(xSpeedAdjustment, ySpeedAdjustment, zSpeedAdjustment)));

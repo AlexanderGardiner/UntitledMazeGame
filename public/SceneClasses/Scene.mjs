@@ -58,7 +58,6 @@ export default class Scene {
     }
 
     drawSpriteOnCanvas(x, y, width, height, image) {
-        console.log(this.canvasHeight/2-y+this.player.getPosition3D().getYPos())
         this.ctx.drawImage(image, x-this.player.getPosition3D().getXPos()+this.canvasWidth/2, this.canvasHeight/2-y+this.player.getPosition3D().getYPos(), width, height);
     }
 
