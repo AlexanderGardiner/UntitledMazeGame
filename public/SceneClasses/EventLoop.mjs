@@ -2,6 +2,7 @@ import Rotation3D from "../UtilClasses/Rotation3D.mjs";
 import Position3D from "../UtilClasses/Position3D.mjs";
 import Vector3D from "../UtilClasses/Vector3D.mjs";
 import CollisionManager from "./CollisionManager.mjs";
+import LevelLoader from "../LevelClasses/LevelLoader.mjs";
 
 export default class EventLoop {
     constructor(scene, keyboardInput) {
@@ -11,6 +12,8 @@ export default class EventLoop {
         this.currentTime = performance.now();
         this.deltaTime;
         this.collisionManager = new CollisionManager(this.scene);
+        this.levelLoader = new LevelLoader();
+        this.levelLoader.loadLevel("level1",this.scene);
     }
 
     update() {
