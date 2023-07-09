@@ -46,7 +46,7 @@ export default class EventLoop {
         let playerSpeedIncrease = new Vector3D(0,0,0);
         
         if (this.keyboardInput.getUpPressed()) {
-            console.log(this.playerDashing)
+            console.log(performance.now()-this.playerDashEndTime>playerMovementParameters.getDashRechargeTime())
             if ((this.keyboardInput.getDashPressed() || this.playerDashing) && performance.now()-this.playerDashEndTime>playerMovementParameters.getDashRechargeTime()) {
                 if (!this.playerDashing) {
                     this.dashStartTime = performance.now();
@@ -79,27 +79,96 @@ export default class EventLoop {
         }
 
         if (this.keyboardInput.getDownPressed()) {
-            if (player.getSpeed().getYMagnitude()-playerMovementParameters.getAcceleration()>-playerMovementParameters.getMaxSpeed()) {
-                playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(0,-playerMovementParameters.getAcceleration(),0));
+            if ((this.keyboardInput.getDashPressed() || this.playerDashing) && performance.now()-this.playerDashEndTime>playerMovementParameters.getDashRechargeTime()) {
+                if (!this.playerDashing) {
+                    this.dashStartTime = performance.now();
+                    this.playerDashing = true;
+                    if (player.getSpeed().getYMagnitude()-playerMovementParameters.getDashAcceleration()>-playerMovementParameters.getDashSpeed()) {
+                        playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(0,-playerMovementParameters.getDashAcceleration(),0));
+                    } else {
+                        playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(0,-playerMovementParameters.getDashSpeed() - player.getSpeed().getYMagnitude(),0));
+                    } 
+                } else {
+                    if (performance.now()-this.dashStartTime<playerMovementParameters.getDashLength()) {
+                        if (player.getSpeed().getYMagnitude()-playerMovementParameters.getDashAcceleration()>-playerMovementParameters.getDashSpeed()) {
+                            playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(0,-playerMovementParameters.getDashAcceleration(),0));
+                        } else {
+                            playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(0,-playerMovementParameters.getDashSpeed() - player.getSpeed().getYMagnitude(),0));
+                        } 
+                    } else {
+                        this.playerDashEndTime = performance.now();
+                        this.playerDashing = false;
+                    }
+                }
             } else {
-                playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(0,-playerMovementParameters.getMaxSpeed() - player.getSpeed().getYMagnitude(),0));
-            } 
+                if (player.getSpeed().getYMagnitude()-playerMovementParameters.getAcceleration()>-playerMovementParameters.getMaxSpeed()) {
+                    playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(0,-playerMovementParameters.getAcceleration(),0));
+                } else {
+                    playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(0,-playerMovementParameters.getMaxSpeed() - player.getSpeed().getYMagnitude(),0));
+                } 
+            }
         }
 
         if (this.keyboardInput.getRightPressed()) {
-            if (player.getSpeed().getXMagnitude()+playerMovementParameters.getAcceleration()<playerMovementParameters.getMaxSpeed()) {
-                playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(playerMovementParameters.getAcceleration(),0,0));
+            if ((this.keyboardInput.getDashPressed() || this.playerDashing) && performance.now()-this.playerDashEndTime>playerMovementParameters.getDashRechargeTime()) {
+                if (!this.playerDashing) {
+                    this.dashStartTime = performance.now();
+                    this.playerDashing = true;
+                    if (player.getSpeed().getXMagnitude()+playerMovementParameters.getDashAcceleration()<playerMovementParameters.getDashSpeed()) {
+                        playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(playerMovementParameters.getDashAcceleration(),0,0));
+                    } else {
+                        playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(playerMovementParameters.getDashSpeed() - player.getSpeed().getXMagnitude(),0,0));
+                    } 
+                } else {
+                    if (performance.now()-this.dashStartTime<playerMovementParameters.getDashLength()) {
+                        if (player.getSpeed().getXMagnitude()+playerMovementParameters.getDashAcceleration()<playerMovementParameters.getDashSpeed()) {
+                            playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(playerMovementParameters.getDashAcceleration(),0,0));
+                        } else {
+                            playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(playerMovementParameters.getDashSpeed() - player.getSpeed().getXMagnitude(),0,0));
+                        } 
+                    } else {
+                        this.playerDashEndTime = performance.now();
+                        this.playerDashing = false;
+                    }
+                }
             } else {
-                playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(playerMovementParameters.getMaxSpeed() - player.getSpeed().getXMagnitude(),0,0));
-            } 
+                if (player.getSpeed().getXMagnitude()+playerMovementParameters.getAcceleration()<playerMovementParameters.getMaxSpeed()) {
+                    playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(playerMovementParameters.getAcceleration(),0,0));
+                } else {
+                    playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(playerMovementParameters.getMaxSpeed() - player.getSpeed().getXMagnitude(),0,0));
+                } 
+            }
         }
 
         if (this.keyboardInput.getLeftPressed()) {
-            if (player.getSpeed().getXMagnitude()-playerMovementParameters.getAcceleration()>-playerMovementParameters.getMaxSpeed()) {
-                playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(-playerMovementParameters.getAcceleration(),0,0));
+            if ((this.keyboardInput.getDashPressed() || this.playerDashing) && performance.now()-this.playerDashEndTime>playerMovementParameters.getDashRechargeTime()) {
+                if (!this.playerDashing) {
+                    this.dashStartTime = performance.now();
+                    this.playerDashing = true;
+                    if (player.getSpeed().getXMagnitude()-playerMovementParameters.getDashAcceleration()>-playerMovementParameters.getDashSpeed()) {
+                        playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(-playerMovementParameters.getDashAcceleration(),0,0));
+                    } else {
+                        playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(-playerMovementParameters.getDashSpeed() - player.getSpeed().getXMagnitude(),0,0));
+                    } 
+                } else {
+                    if (performance.now()-this.dashStartTime<playerMovementParameters.getDashLength()) {
+                        if (player.getSpeed().getXMagnitude()-playerMovementParameters.getDashAcceleration()>-playerMovementParameters.getDashSpeed()) {
+                            playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(-playerMovementParameters.getDashAcceleration(),0,0));
+                        } else {
+                            playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(-playerMovementParameters.getDashSpeed() - player.getSpeed().getXMagnitude(),0,0));
+                        } 
+                    } else {
+                        this.playerDashEndTime = performance.now();
+                        this.playerDashing = false;
+                    }
+                }
             } else {
-                playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(-playerMovementParameters.getMaxSpeed() - player.getSpeed().getXMagnitude(),0,0));
-            } 
+                if (player.getSpeed().getXMagnitude()-playerMovementParameters.getAcceleration()>-playerMovementParameters.getMaxSpeed()) {
+                    playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(-playerMovementParameters.getAcceleration(),0,0));
+                } else {
+                    playerSpeedIncrease = playerSpeedIncrease.addVector3D(new Vector3D(-playerMovementParameters.getMaxSpeed() - player.getSpeed().getXMagnitude(),0,0));
+                } 
+            }
         }
 
         
