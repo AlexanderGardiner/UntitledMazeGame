@@ -16,7 +16,7 @@ export default class EventLoop {
         this.dashStartTime = 0;
         this.playerDashing = false;
         this.playerDashEndTime = 0;
-        //this.levelLoader.loadLevel("level1",this.scene);
+        this.levelLoader.loadLevel("level1",this.scene);
         
     }
 

@@ -25,7 +25,6 @@ export default class Scene {
 
     addEntity(entity) {
         this.entities.push(entity);
-        console.log(this.entities);
     }
 
     getPlayer() {
