@@ -10,6 +10,7 @@ export default class LevelLoader {
                 console.log(level)
                 let x = 0;
                 let y = 0;
+                let blockSize = 20;
                 for (let i=0; i<level.length;i++) {
                     let startPoint = 0;
                     
@@ -19,9 +20,9 @@ export default class LevelLoader {
                         if (level[i][j]!="X" || j>=level[i].length-2) {
                             
                             if (j>=level[i].length-2) {
-                                scene.addEntity(new Sprite(new Position3D(x*5,(level.length*10)-y*10,-100), "Player.png",(j+2-x)*5,10,10,10));
+                                scene.addEntity(new Sprite(new Position3D(x*blockSize/2,y*blockSize,-100), "Player.png",(j+2-x)*blockSize/2,blockSize,(j+2-x)*blockSize/2,blockSize));
                             } else {
-                                scene.addEntity(new Sprite(new Position3D(x*5,(level.length*10)-y*10,-100), "Player.png",(j-x)*5,10,10,10));
+                                scene.addEntity(new Sprite(new Position3D(x*blockSize/2,y*blockSize,-100), "Player.png",(j-x)*blockSize/2,blockSize,(j-x)*blockSize/2,blockSize));
                                 
                             }
 

@@ -24,7 +24,7 @@ export default class EventLoop {
         this.currentTime = performance.now();
         this.deltaTime = (this.currentTime-this.previousTime)/17;
         let player = this.scene.getPlayer();
-        let playerSpeedIncrease =  this.movePlayer();
+        let playerSpeedIncrease =  this.getPlayerSpeedIncrease();
 
         player.setSpeed(player.getSpeed().addVector3D(playerSpeedIncrease));
 
@@ -39,7 +39,7 @@ export default class EventLoop {
         this.previousTime = this.currentTime;
     }
 
-    movePlayer() {
+    getPlayerSpeedIncrease() {
         let player = this.scene.getPlayer();
         let playerMovementParameters = player.getMovementParameters()
 
