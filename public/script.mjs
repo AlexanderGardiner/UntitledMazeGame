@@ -14,7 +14,6 @@ var scene = new Scene(document.getElementById("viewCanvas"),
                       new Player(new Position3D(0,0,-100), "Player.png",50,50,50,50,new MovementParameters(3,0.7,0.7,15,6,150,2000)));
 var keyboardInput = new KeyboardInput("ArrowLeft", "ArrowRight","ArrowUp","ArrowDown","c");
 
-scene.addEntity(new Sprite(new Position3D(600,500,-100), "Player.png",50,50,50,50))
 
 var eventLoop = new EventLoop(scene, keyboardInput);
 

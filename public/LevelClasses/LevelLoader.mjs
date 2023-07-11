@@ -6,46 +6,25 @@ export default class LevelLoader {
         fetch("./Levels/"+levelName+".txt")
             .then((response) => response.text())
             .then((text) => {
-                let level = this.toLine(text);
-                console.log(level)
-                let x = 0;
-                let y = 0;
-                let blockSize = 20;
-                for (let i=0; i<level.length;i++) {
+                console.log(text)
+                let level = text.split("\r\n");
+                console.log(level);
+                let blockSize = 50;
+                for (let y=0; y<level.length;y++) {
                     let startPoint = 0;
                     
-                    for (let j=0; j<level[i].length;j+=2) {
-                        console.log("i: "+i+" j: "+j+" "+level[i][j])
-                        console.log(j+" "+(level[i].length-2))
-                        if (level[i][j]!="X" || j>=level[i].length-2) {
-                            
-                            if (j>=level[i].length-2) {
-                                scene.addEntity(new Sprite(new Position3D(x*blockSize/2,y*blockSize,-100), "Player.png",(j+2-x)*blockSize/2,blockSize,(j+2-x)*blockSize/2,blockSize));
-                            } else {
-                                scene.addEntity(new Sprite(new Position3D(x*blockSize/2,y*blockSize,-100), "Player.png",(j-x)*blockSize/2,blockSize,(j-x)*blockSize/2,blockSize));
-                                
-                            }
+                    for (let x=0; x<level[y].length;x+=2) {
+                        
+                        if (level[y][x]=="W") {
+                            console.log("x:"+x+" y:"+y+" val:"+level[y][x]);
 
-                            if (j>=level[i].length-2) {
-                                console.log(level[i].substring(startPoint,j+1));
-                            } else {
-                                console.log(level[i].substring(startPoint,j-1));
-                            }
+                            scene.addEntity(new Sprite(new Position3D((x/2)*blockSize,(level.length-y)*blockSize,-100), "Player.png",blockSize,blockSize,blockSize,blockSize));
+                       
                             
-                            if (j==level[i].length-2) {
-                                console.log("x: "+x+" y: "+y+" end");
-                                y=i+1;
-                                x=0;
-                                startPoint = 0;
-                                console.log("x: "+x+" y: "+y);
-                            } else {
-                                console.log("x: "+x+" y: "+y);
-                                x = j+2;
-                                y = i;
-                                startPoint = (j)+2;
-                                console.log("x: "+x+" y: "+y);
-                            }
-                            
+                        } else if (level[y][x]=="P") {
+                            let player =scene.getEntity(1);
+                            console.log(x)
+                            player.setPosition3D(new Position3D((x/2)*blockSize,(level.length-y)*blockSize+player.getHeight(),-100));
                         }
                     }
                     
