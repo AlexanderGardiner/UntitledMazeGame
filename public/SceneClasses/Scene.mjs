@@ -27,11 +27,16 @@ export default class Scene {
         this.entities.push(entity);
     }
 
+    removeEntity(index) {
+        this.entities.splice(index,1);
+    }
+
     getPlayer() {
         return this.player;
     }
 
     updateScene() {
+        this.clearScene();
         for (let i=0; i<this.entities.length; i++) {
             if (this.entities[i].type == "Point") {
                 let pointSize = 20;
@@ -58,6 +63,10 @@ export default class Scene {
 
     drawSpriteOnCanvas(x, y, width, height, image) {
         this.ctx.drawImage(image, x-this.player.getPosition3D().getXPos()+this.canvasWidth/2, this.canvasHeight/2-y-height+this.player.getPosition3D().getYPos(), width, height);
+    }
+
+    reset() {
+        this.entities = this.entities.slice(0,2)
     }
 
     
