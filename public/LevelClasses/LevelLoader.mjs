@@ -19,7 +19,7 @@ export default class LevelLoader {
                        
                             
                         } else if (level[y][x]=="P") {
-                            let player =scene.getEntity(1);
+                            let player =scene.getPlayer();
                             player.setPosition3D(new Position3D((x/2)*blockSize,(level.length-y)*blockSize+player.getHeight(),-100));
                         }
                     }

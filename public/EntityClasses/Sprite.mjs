@@ -14,6 +14,11 @@ export default class Sprite extends Entity {
         return this.image;
     }
 
+    setImage(imagePath) {
+        this.image = new Image();
+        this.image.src = window.location.href+"Images/"+imagePath;
+    }
+
     getWidth() {
         return this.width;
     }
