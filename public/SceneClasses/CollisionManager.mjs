@@ -14,9 +14,9 @@ export default class CollisionManager {
             if (vector3D.getXMagnitude()>0) {
                 let i=0;
                 let hitRight = false;
-                while (i<vector3D.getXMagnitude()*20 && !hitRight) {
+                while (i<vector3D.getXMagnitude() && !hitRight) {
                     let j = 1;
-                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0.05,0,0)));
+                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0.1,0,0)));
                     while (!hitRight && j<this.scene.getEntitiesLength()) {
                         
                         hitRight = this.checkCollision(entity, this.scene.getEntity(j)).getRight();
@@ -27,13 +27,13 @@ export default class CollisionManager {
                         entity.getSpeed().addVector3D(new Vector3D(-entity.getSpeed().getXMagnitude(),0,0));
                     }
                 }
-                entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-0.05,0,0)));
+                entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-0.1,0,0)));
             } else if (vector3D.getXMagnitude()<0) {
                 let i=0;
                 let hitLeft = false;
-                while (i>vector3D.getXMagnitude()*20 && !hitLeft) {
+                while (i>vector3D.getXMagnitude() && !hitLeft) {
                     let j = 1;
-                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-0.05,0,0)));
+                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-0.1,0,0)));
                     while (!hitLeft && j<this.scene.getEntitiesLength()) {
                         
                         hitLeft = this.checkCollision(entity, this.scene.getEntity(j)).getLeft();
@@ -44,7 +44,7 @@ export default class CollisionManager {
                         entity.getSpeed().addVector3D(new Vector3D(-entity.getSpeed().getXMagnitude(),0,0));
                     }
                 }
-                entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0.05,0,0)));
+                entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0.1,0,0)));
             }
             
         }
@@ -53,9 +53,9 @@ export default class CollisionManager {
             if (vector3D.getYMagnitude()>0) {
                 let i=0;
                 let hitTop = false;
-                while (i<vector3D.getYMagnitude()*20 && !hitTop) {
+                while (i<vector3D.getYMagnitude() && !hitTop) {
                     let j = 1;
-                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,0.05,0)));
+                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,0.1,0)));
                     while (!hitTop && j<this.scene.getEntitiesLength()) {
                         
                         hitTop = this.checkCollision(entity, this.scene.getEntity(j)).getTop();
@@ -66,13 +66,13 @@ export default class CollisionManager {
                         entity.getSpeed().addVector3D(new Vector3D(0,-entity.getSpeed().getYMagnitude(),0));
                     }
                 }
-                entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-0.05,0)));
+                entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-0.1,0)));
             } else if (vector3D.getYMagnitude()<0) {
                 let i=0;
                 let hitBottom = false;
-                while (i>vector3D.getYMagnitude()*20 && !hitBottom) {
+                while (i>vector3D.getYMagnitude() && !hitBottom) {
                     let j = 2;
-                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-0.05,0)));
+                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-0.1,0)));
                     while (!hitBottom && j<this.scene.getEntitiesLength()) {
                         hitBottom = this.checkCollision(entity, this.scene.getEntity(j)).getBottom();
                         j++;
@@ -82,7 +82,7 @@ export default class CollisionManager {
                         entity.getSpeed().addVector3D(new Vector3D(0,-entity.getSpeed().getYMagnitude(),0));
                     }
                 }
-                entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,0.05,0)));
+                entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,0.1,0)));
             }
             
         }
