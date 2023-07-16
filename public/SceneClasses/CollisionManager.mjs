@@ -10,6 +10,7 @@ export default class CollisionManager {
     }
 
     move(entity, vector3D) {
+        console.log(vector3D.getXMagnitude())
         if (true){//Math.abs(vector3D.getXMagnitude())>Math.abs(vector3D.getYMagnitude())) {
             if (vector3D.getXMagnitude()>0) {
                 let i=0;
