@@ -123,11 +123,11 @@ export default class CollisionManager {
                 }
 
                 
-            } else if (Math.ceil(vector3D.getYMagnitude())<0) {
+            } else if (vector3D.getYMagnitude()<0) {
                 let i=0;
                 let hitBottom = false;
-                while (i>vector3D.getYMagnitude() && !hitBottom) {
-                    let j = 2;
+                while (i>Math.ceil(vector3D.getYMagnitude()) && !hitBottom) {
+                    let j = 1;
                     entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-0.1,0)));
                     while (!hitBottom && j<this.scene.getEntitiesLength()) {
                         hitBottom = this.checkCollision(entity, this.scene.getEntity(j)).getBottom();
