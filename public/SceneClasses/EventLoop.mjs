@@ -35,7 +35,7 @@ export default class EventLoop {
 
         let deltaTimeAdjustedSpeed = this.player.getSpeed().multiplyVector3D(new Vector3D(this.deltaTime, this.deltaTime, this.deltaTime));
         let halfDeltaTimeAdjustedSpeed = deltaTimeAdjustedSpeed.multiplyVector3D(new Vector3D(0.5, 0.5, 0.5));
-        this.collisionManager.move(this.player, deltaTimeAdjustedSpeed);        
+        this.collisionManager.move(this.player, halfDeltaTimeAdjustedSpeed);        
 
         if (!this.playerCanDash) {
             this.player.setImage("PlayerRechargingDash.png");
@@ -44,6 +44,7 @@ export default class EventLoop {
         }
         this.scene.updateScene();
 
+        this.collisionManager.move(this.player, halfDeltaTimeAdjustedSpeed);
 
         window.requestAnimationFrame(this.update.bind(this));
         // setTimeout(this.update.bind(this), 20);
