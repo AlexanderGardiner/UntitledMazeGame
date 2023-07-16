@@ -34,7 +34,7 @@ export default class EventLoop {
         this.player.setSpeed(this.player.getSpeed().addVector3D(playerSpeedIncrease));
 
         
-        this.collisionManager.move(this.player, this.player.getSpeed());
+        this.collisionManager.move(this.player, this.player.getSpeed().multiplyVector3D(new Vector3D(this.deltaTime, this.deltaTime, this.deltaTime)));
 
         if (!this.playerCanDash) {
             this.player.setImage("PlayerRechargingDash.png");
