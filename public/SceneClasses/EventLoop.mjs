@@ -35,7 +35,6 @@ export default class EventLoop {
 
         let deltaTimeAdjustedSpeed = this.player.getSpeed().multiplyVector3D(new Vector3D(this.deltaTime, this.deltaTime, this.deltaTime));
         let halfDeltaTimeAdjustedSpeed = deltaTimeAdjustedSpeed.multiplyVector3D(new Vector3D(0.5, 0.5, 0.5));
-        console.log(halfDeltaTimeAdjustedSpeed)
         this.collisionManager.move(this.player, halfDeltaTimeAdjustedSpeed);        
 
         if (!this.playerCanDash) {
