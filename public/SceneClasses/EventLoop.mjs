@@ -26,16 +26,17 @@ export default class EventLoop {
 
     update() {
         this.currentTime = performance.now();
-        this.deltaTime = (this.currentTime-this.previousTime)/17;
+        this.deltaTime = (this.currentTime-this.previousTime)/20;
+        
         this.player = this.scene.getPlayer();
         this.playerCanDash = performance.now()-this.playerDashEndTime>this.playerMovementParameters.getDashRechargeTime();
-        let playerSpeedIncrease =  this.getPlayerSpeedIncrease();
+        let playerSpeedIncrease = this.getPlayerSpeedIncrease();
 
         this.player.setSpeed(this.player.getSpeed().addVector3D(playerSpeedIncrease));
-
+        
         let deltaTimeAdjustedSpeed = this.player.getSpeed().multiplyVector3D(new Vector3D(this.deltaTime, this.deltaTime, this.deltaTime));
         let halfDeltaTimeAdjustedSpeed = deltaTimeAdjustedSpeed.multiplyVector3D(new Vector3D(0.5, 0.5, 0.5));
-        this.collisionManager.move(this.player, halfDeltaTimeAdjustedSpeed);        
+        this.collisionManager.move(this.player, deltaTimeAdjustedSpeed);        
 
         if (!this.playerCanDash) {
             this.player.setImage("PlayerRechargingDash.png");
@@ -44,12 +45,11 @@ export default class EventLoop {
         }
         this.scene.updateScene();
 
-        this.collisionManager.move(this.player, halfDeltaTimeAdjustedSpeed);
-
-        window.requestAnimationFrame(this.update.bind(this));
-        // setTimeout(this.update.bind(this), 20);
-
         this.previousTime = this.currentTime;
+        window.requestAnimationFrame(this.update.bind(this));
+        // setTimeout(this.update.bind(this), 0);
+
+        
     }
 
     getPlayerSpeedIncrease() {
