@@ -31,18 +31,18 @@ export default class CollisionManager {
                 if (hitRight) {
                     entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-0.1,0,0)));
                 } else {
-                    // entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(vector3D.getXMagnitude()%1,0,0)));
-                    // let j = 1;
-                    // while (!hitRight && j<this.scene.getEntitiesLength()) {
+                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(vector3D.getXMagnitude()%1,0,0)));
+                    let j = 1;
+                    while (!hitRight && j<this.scene.getEntitiesLength()) {
                             
-                    //     hitRight = this.checkCollision(entity, this.scene.getEntity(j)).getRight();
-                    //     j++;
-                    // }
+                        hitRight = this.checkCollision(entity, this.scene.getEntity(j)).getRight();
+                        j++;
+                    }
 
-                    // if (hitRight) {
-                    //     entity.getSpeed().addVector3D(new Vector3D(-entity.getSpeed().getXMagnitude(),0,0));
-                    //     entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-vector3D.getXMagnitude()%1,0,0)));
-                    // }
+                    if (hitRight) {
+                        entity.getSpeed().addVector3D(new Vector3D(-entity.getSpeed().getXMagnitude(),0,0));
+                        entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-vector3D.getXMagnitude()%1,0,0)));
+                    }
                 }
                 
 
@@ -68,18 +68,18 @@ export default class CollisionManager {
                 if (hitLeft) {
                     entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0.1,0,0)));
                 } else {
-                    // entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(vector3D.getXMagnitude()%1,0,0)));
-                    // let j = 1;
-                    // while (!hitLeft && j<this.scene.getEntitiesLength()) {
+                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(vector3D.getXMagnitude()%1,0,0)));
+                    let j = 1;
+                    while (!hitLeft && j<this.scene.getEntitiesLength()) {
                             
-                    //     hitLeft = this.checkCollision(entity, this.scene.getEntity(j)).getLeft();
-                    //     j++;
-                    // }
+                        hitLeft = this.checkCollision(entity, this.scene.getEntity(j)).getLeft();
+                        j++;
+                    }
 
-                    // if (hitLeft) {
-                    //     entity.getSpeed().addVector3D(new Vector3D(-entity.getSpeed().getXMagnitude(),0,0));
-                    //     entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-vector3D.getXMagnitude()%1,0,0)));
-                    // }
+                    if (hitLeft) {
+                        entity.getSpeed().addVector3D(new Vector3D(-entity.getSpeed().getXMagnitude(),0,0));
+                        entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(-vector3D.getXMagnitude()%1,0,0)));
+                    }
                 }
 
                 
@@ -108,18 +108,18 @@ export default class CollisionManager {
                 if (hitTop) {
                     entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-0.1,0)));
                 } else {
-                    // entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,vector3D.getYMagnitude()%1,0)));
-                    // let j = 1;
-                    // while (!hitTop && j<this.scene.getEntitiesLength()) {
+                    entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,vector3D.getYMagnitude()%1,0)));
+                    let j = 1;
+                    while (!hitTop && j<this.scene.getEntitiesLength()) {
                             
-                    //     hitTop = this.checkCollision(entity, this.scene.getEntity(j)).getTop();
-                    //     j++;
-                    // }
+                        hitTop = this.checkCollision(entity, this.scene.getEntity(j)).getTop();
+                        j++;
+                    }
 
-                    // if (hitTop) {
-                    //     entity.getSpeed().addVector3D(new Vector3D(0,-entity.getSpeed().getYMagnitude(),0));
-                    //     entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-vector3D.getYMagnitude()%1,0)));
-                    // }
+                    if (hitTop) {
+                        entity.getSpeed().addVector3D(new Vector3D(0,-entity.getSpeed().getYMagnitude(),0));
+                        entity.setPosition3D(entity.getPosition3D().addPosition3D(new Position3D(0,-vector3D.getYMagnitude()%1,0)));
+                    }
                 }
 
                 
