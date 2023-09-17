@@ -1,4 +1,4 @@
-export default class Colour {
+export default class MovementParameters {
     constructor(maxSpeed, acceleration, deceleration, dashSpeed, dashAcceleration, dashLength, dashRechargeTime) {
         this.maxSpeed = maxSpeed;
         this.acceleration = acceleration;

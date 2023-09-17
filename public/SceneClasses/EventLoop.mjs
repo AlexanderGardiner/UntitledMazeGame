@@ -3,6 +3,7 @@ import Position3D from "../UtilClasses/Position3D.mjs";
 import Vector3D from "../UtilClasses/Vector3D.mjs";
 import CollisionManager from "./CollisionManager.mjs";
 import LevelLoader from "../LevelClasses/LevelLoader.mjs";
+import AStar from "../UtilClasses/AStar.mjs";
 
 export default class EventLoop {
     constructor(scene, keyboardInput) {
@@ -18,8 +19,8 @@ export default class EventLoop {
         this.playerDashEndTime = 0;
         this.player = this.scene.getPlayer();
         this.playerMovementParameters = this.player.getMovementParameters();
-        
-        this.levelLoader.loadLevel("level1",this.scene).then();
+        this.aStar = new AStar();
+        this.levelLoader.loadLevel("testLevel",this.scene,this.aStar).then();
         
         
     }
@@ -35,7 +36,6 @@ export default class EventLoop {
         this.player.setSpeed(this.player.getSpeed().addVector3D(playerSpeedIncrease));
         
         let deltaTimeAdjustedSpeed = this.player.getSpeed().multiplyVector3D(new Vector3D(this.deltaTime, this.deltaTime, this.deltaTime));
-        let halfDeltaTimeAdjustedSpeed = deltaTimeAdjustedSpeed.multiplyVector3D(new Vector3D(0.5, 0.5, 0.5));
         this.collisionManager.move(this.player, deltaTimeAdjustedSpeed);        
 
         if (!this.playerCanDash) {
